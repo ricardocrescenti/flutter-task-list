@@ -1,7 +1,8 @@
 class TaskModel {
   DateTime date;
-  String description;
-  bool isComplete;
+  String task;
+  String notes;
+  bool complete;
 
-  TaskModel(this.date, this.description, {this.isComplete = false});
+  TaskModel(this.date, this.task, this.notes, {this.complete = false});
 }

@@ -10,12 +10,12 @@ class TaskListComponent extends Component<TaskListController> {
 
   @override
   Widget build(BuildContext context, Module module, TaskListController controller) {
-    return ListConsumer(
+    return ListConsumer<TaskModel>(
       list: module.service<DataService>().taks,
-      builder: (context, module, list) {
+      builder: (context, list) {
         return ListView.separated(
-          itemCount: list.items.length,
-          itemBuilder: (context, index) => buildTaksCard(context, controller, list.items[index]),
+          itemCount: list.length,
+          itemBuilder: (context, index) => buildTaksCard(context, controller, list[index]),
           separatorBuilder: (context, index) => Container(),
           padding: EdgeInsets.all(5),
         );

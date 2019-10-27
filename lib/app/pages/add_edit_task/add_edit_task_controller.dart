@@ -12,14 +12,17 @@ class AddEditTaskController extends Controller {
     'task': '',
     'notes': '',
     'complete': ValueProvider<bool>(initialValue: false),
+    'taskType': TaskType.Call
   });
 
   AddEditTaskController(Module module, this.task) : super(module) {
     if (task != null) {
       formValues.setValues({
+        'date': task.date,
         'complete': task.complete,
         'task': task.task,
-        'notes': task.notes
+        'notes': task.notes,
+        'taskType': task.taskType
       });
     }
   }
@@ -28,13 +31,14 @@ class AddEditTaskController extends Controller {
     if (formState.currentState.validate()) {
 
         TaskModel currentTask = TaskModel(
-          formValues.getValue('date'), 
+          DateTime.parse(formValues.getValue('date').toString()), 
           formValues.getValue('task'), 
           formValues.getValue('notes'),
+          formValues.getValue('taskType'),
           complete: formValues.getValue('complete'));
 
       if (task == null) {
-        module.service<DataService>().taks.insertItem(currentTask);
+        module.service<DataService>().taks.addItem(currentTask);
       } else {
         module.service<DataService>().taks.replaceItem(task, currentTask);
       }
@@ -48,5 +52,29 @@ class AddEditTaskController extends Controller {
 
   _close(BuildContext context) {
     Navigator.of(context).pop();
+  }
+
+
+  showDate(BuildContext context) async {
+    DateTime selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2018),
+      lastDate: DateTime(2030),
+    );
+    if (selectedDate != null) {
+      print(selectedDate.toString());
+    }
+    return selectedDate;
+  }
+  showTime(BuildContext context) async {
+    TimeOfDay selectedTimeOfDay = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (selectedTimeOfDay != null) {
+      print(selectedTimeOfDay.toString());
+    }
+    return selectedTimeOfDay;
   }
 }

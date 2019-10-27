@@ -6,8 +6,6 @@ class AppService extends Service {
   bool _darkMode = false;
   bool get darkMode => _darkMode;
 
-  
-
   changeDarkMode() {
     _darkMode = !_darkMode;
     notifyListeners();

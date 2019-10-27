@@ -21,10 +21,15 @@ class AppModule extends Module {
   ];
 
   @override
+  initialize(BuildContext context) {
+    service<AppService>().changeDarkMode();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
     return ServiceConsumer<AppService>(
-      builder: (context, module, service) {
+      builder: (context, service) {
 
         return MaterialApp(
           title: 'Task List',

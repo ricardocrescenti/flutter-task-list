@@ -63,10 +63,10 @@ packages:
   module_provider:
     dependency: "direct main"
     description:
-      path: "D:\\Projetos\\CrescentiApps\\Flutter-Packages\\flutter-module-provider"
-      relative: false
-    source: path
-    version: "0.0.5"
+      name: module_provider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   path:
     dependency: transitive
     description:
@@ -88,6 +88,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  simple_form:
+    dependency: "direct main"
+    description:
+      path: "D:\\Projetos\\CrescentiApps\\Flutter-Packages\\flutter-simple-form"
+      relative: false
+    source: path
+    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -107,13 +114,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.3"
-  standard_form:
-    dependency: "direct main"
-    description:
-      path: "D:\\Projetos\\CrescentiApps\\Flutter-Packages\\flutter-standard-form"
-      relative: false
-    source: path
-    version: "0.0.1"
   stream_channel:
     dependency: transitive
     description:

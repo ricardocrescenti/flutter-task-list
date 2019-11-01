@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:module_provider/module_provider.dart';
+import 'package:task_list/app/app_component.dart';
 import 'package:task_list/app/pages/home/home_component.dart';
 import 'package:task_list/app/pages/add_edit_task/add_edit_task_component.dart';
 import 'package:task_list/app/services/app_service.dart';
 import 'package:task_list/app/services/data_service.dart';
-import 'package:task_list/models/models.dart';
 
 class AppModule extends Module {
 
@@ -26,26 +26,5 @@ class AppModule extends Module {
   }
 
   @override
-  Widget build(BuildContext context) {
-
-    return ServiceConsumer<AppService>(
-      builder: (context, service) {
-
-        return MaterialApp(
-          title: 'Task List',
-          theme: ThemeData(
-            brightness: (service.darkMode ? Brightness.dark : Brightness.light),
-            primarySwatch: Colors.blue,
-          ),
-          initialRoute: Page.home,
-          routes: {
-            Page.home: (context) => component<HomeComponent>(),
-            Page.addEdit: (context) => component<AddEditTaskComponent>(),
-          },
-        );
-
-      }
-    );
-    
-  }
+  Widget build(BuildContext context) => AppComponent();
 }

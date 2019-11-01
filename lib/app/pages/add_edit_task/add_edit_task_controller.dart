@@ -7,42 +7,25 @@ class AddEditTaskController extends Controller {
   TaskModel task;
 
   GlobalKey<FormState> formState = GlobalKey();
-  ValuesProvider formValues = ValuesProvider({
-    'date': DateTime.now(),
-    'task': '',
-    'notes': '',
-    'complete': ValueProvider<bool>(initialValue: false),
-    'taskType': TaskType.Call
-  });
+  ValuesProvider formValues = ValuesProvider(TaskModel().toJson());
 
   AddEditTaskController(Module module, this.task) : super(module) {
     if (task != null) {
-      formValues.setValues({
-        'date': task.date,
-        'complete': task.complete,
-        'task': task.task,
-        'notes': task.notes,
-        'taskType': task.taskType
-      });
+      formValues.setValues(task.toJson());
     }
   }
   
   save(BuildContext context) {
     if (formState.currentState.validate()) {
 
-        TaskModel currentTask = TaskModel(
-          DateTime.parse(formValues.getValue('date').toString()), 
-          formValues.getValue('task'), 
-          formValues.getValue('notes'),
-          formValues.getValue('taskType'),
-          complete: formValues.getValue('complete'));
-
+      TaskModel currentTask = TaskModel.fromJson(formValues.values);
       if (task == null) {
         module.service<DataService>().taks.addItem(currentTask);
       } else {
         module.service<DataService>().taks.replaceItem(task, currentTask);
       }
       _close(context);
+      
     }
   }
 

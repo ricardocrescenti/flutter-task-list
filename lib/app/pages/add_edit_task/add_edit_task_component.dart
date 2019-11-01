@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:module_provider/module_provider.dart';
 import 'package:simple_form/fields/simple_combo_box_field.dart';
+import 'package:simple_form/fields/simple_slider_field.dart';
 import 'package:simple_form/simple_form.dart';
 import 'package:task_list/app/pages/add_edit_task/add_edit_task_controller.dart';
 import 'package:task_list/models/task_model.dart';
@@ -51,7 +52,10 @@ class AddEditTaskComponent extends Component<AddEditTaskController> {
             builder: (LayoutForm layout) {
               return layout.rows([
                 layout.columns([
-                  layout.field(1, SimpleDateField(fieldName: 'date', title: 'Date to do',)),
+                  layout.field(1, SimpleComboBoxField<TaskType>(fieldName: 'taskType', title: 'Task type', items: [TaskType.Call, TaskType.Meeting],)),
+                ]),
+                layout.columns([
+                  layout.field(1, SimpleDateField(fieldName: 'date', title: 'Date to do', format: "dd/MM/yyyy",)),
                 ]),
                 layout.columns([
                   layout.field(1, SimpleTextField(fieldName: 'task', title: 'Task')),
@@ -63,12 +67,8 @@ class AddEditTaskComponent extends Component<AddEditTaskController> {
                   layout.field(1, SimpleSwitchField(fieldName: 'complete', title: 'Is Complete',)),
                 ]),
                 layout.columns([
-                  layout.field(1, SimpleComboBoxField<TaskType>(fieldName: 'taskType', title: 'Type', items: [TaskType.Call, TaskType.Meeting],)),
+                  layout.field(1, SimpleSliderField(fieldName: 'porcentComplete', title: 'Porcentage complete', divisions: 10, buildLabel: (value) => value.toString(),)),
                 ]),
-                RaisedButton(
-                  child: Text('Time dialog text'),
-                  onPressed: () => controller.showTime(context),
-                ),
               ]);
             }
           )

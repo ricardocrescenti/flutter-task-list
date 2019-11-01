@@ -35,7 +35,7 @@ class TaskListComponent extends Component<TaskListController> {
               value: task.complete,
               onChanged: null,),
             title: Text(task.task),
-            subtitle: Text(task.date.toString()),
+            subtitle: Text(task.date.toString() + ' ' + task.porcentComplete.toString()),
           ),
         ),
       ),
